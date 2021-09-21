@@ -1,0 +1,55 @@
+https://pokeapi.co/api/v2/pokemon/5
+
+ ],
+    "base_experience": 142,
+    "forms": [
+        {
+            "name": "charmeleon",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/5/"
+        }
+    ],
+
+https://pokeapi.co/api/v2/pokemon/800
+
+],
+    "base_experience": 270,
+    "forms": [
+        {
+            "name": "necrozma",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/800/"
+        }
+    ],
+
+https://pokeapi.co/api/v2/pokemon/pikachu
+
+],
+    "base_experience": 112,
+    "forms": [
+        {
+            "name": "pikachu",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/25/"
+        }
+    ],
+
+
+https://pokeapi.co/api/v2/pokemon/504
+
+ ],
+    "base_experience": 51,
+    "forms": [
+        {
+            "name": "patrat",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/504/"
+        }
+    ],
+
+https://pokeapi.co/api/v2/pokemon/1
+
+ ],
+    "base_experience": 64,
+    "forms": [
+        {
+            "name": "bulbasaur",
+            "url": "https://pokeapi.co/api/v2/pokemon-form/1/"
+        }
+    ],
