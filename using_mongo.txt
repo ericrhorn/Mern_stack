@@ -1,0 +1,1734 @@
+> use my_first_db
+switched to db my_first_db
+> db
+my_first_db
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+test    0.000GB
+> db
+my_first_db
+> db.createCollection("students")
+{ "ok" : 1 }
+> db.students.insert({name: John Doe, home_state: "California", luchy_number: "5", birthday: {month: 1, day: 1, year: 1990}})
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:31
+> db.students.insert({name: "John Doe", home_state: "California", luchy_number: "5", birthday: {month: "1", day: "1", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+> db.students.insert({name: "Jane Doe", home_state: "California", luchy_number: "3", birthday: {month: "2", day: "2", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+> db.students.insert({name: "Jonny Smithe", home_state: "California", luchy_number: "7", birthday: {month: "3", day: "3", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name: "Peter Piper", home_state: "Washingotna", luchy_number: "1", birthday: {month: "4", day: "4", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washingotna",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+> db.students.insert({name: "Polly Pocket", home_state: "Washingon", luchy_number: "9", birthday: {month: "5", day: "5", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washingotna",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washingon",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.update{(name: "Peter"}, {$set: {home_state: "Washington"}})
+uncaught exception: SyntaxError: unexpected token: '{' :
+@(shell):1:18
+> db.students.update({name: "Peter"}, {$set: {home_state: "Washington"}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washingotna",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washingon",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.update({name: "Peter Piper"}, {$set: {home_state: "Washington"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washingon",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.update({name: "Polly Pocketr"}, {$set: {home_state: "Washington"}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.update({name: "Polly Pocket"}, {$set: {home_state: "Washington"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.find({home_state: {$in: "California"}}).pretty()
+Error: error: {
+	"ok" : 0,
+	"errmsg" : "$in needs an array",
+	"code" : 2,
+	"codeName" : "BadValue"
+}
+> db.students.find({home_state: {$in: ("California")}}).pretty()
+Error: error: {
+	"ok" : 0,
+	"errmsg" : "$in needs an array",
+	"code" : 2,
+	"codeName" : "BadValue"
+}
+> db.students.find({home_state: {$in: ["California"]}}).pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$gt: "5"}}).pretty()
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$gt: "3"}}).pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$lte: "10"}}).pretty()
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$lte: "10."}}).pretty()
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$lte:10}}).pretty()
+> db.students.find({luchy_number: {$lte:10}}).pretty()
+> db.students.find({luchy_number: {$lte:"10"}}).pretty()
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$lte:"9"}}).pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$lte:"10.0"}}).pretty()
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+> db.students.find({luchy_number: {$lte:"9"}}).pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.find({$and:[{luchy_number: {$lte:"1"}}, {$gte: "9"}}]).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+> db.students.find({$and:[{luchy_number: {$lte:"9"}}, {$gte: "1"}}]).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+> db.students.find({$and:[{luchy_number: {$lte:"9"}}, {$gte: "1"}}]}).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+> db.students.find({$and:[{luchy_number: {$lte:"9"}}, {luchy_number: {$gte: "1"}}]}).pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+> db.students.update({}, {$set: {"interests": [coding, brunch, mongodb]}}, {multi=true})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:79
+> db.students.update({}, {$set: {"interests": ["coding","brunch",  "mongodb"]}}, {multi=true})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:85
+> db.students.update({}, {$set: {"interests": ["coding", "brunch", "mongodb"]}}, {multi: true})
+WriteResult({ "nMatched" : 5, "nUpserted" : 0, "nModified" : 5 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb"
+	]
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb"
+	]
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb"
+	]
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb"
+	]
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb"
+	]
+}
+> db.students.update({name: "John Doe"}, {$push: {interests: {$each:["running", "golf"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Jane Doe"}, {$push: {interests: {$each:["soccer", "swimming"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Jonny Smithee"}, {$push: {interests: {$each:["computers", "fishing"]}}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.update({name: "Jonny Smithe"}, {$push: {interests: {$each:["computers", "fishing"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Peter Piper"}, {$push: {interests: {$each:["sleepings", "rats"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Polly Pocketr"}, {$push: {interests: {$each:["house", "small things"]}}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.update({name: "Polly Pocket"}, {$push: {interests: {$each:["house", "small things"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	]
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	]
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"computers",
+		"fishing"
+	]
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"sleepings",
+		"rats"
+	]
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	]
+}
+> db.students.update({name: "Polly Pocketr"}, {$push: {interests: {"taxes"}}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:72
+> db.students.update({name: "Polly Pocketr"}, {$push: {interests: {"taxes"}}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:72
+> cls
+
+> db.students.update({name: "Polly Pocketr"}, {$push: {interests: {"taxes"}})
+... ^C
+
+> db.students.update({name: "Polly Pocket"}, {$push: {interests: {"taxes"}})
+... ^C
+
+> db.students.update({name: "Polly Pocket"}, {$push: {interests: "taxes"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	]
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	]
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"computers",
+		"fishing"
+	]
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"sleepings",
+		"rats"
+	]
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things",
+		"taxes"
+	]
+}
+> db.students.update({name: "Polly Pocket"}, {$pull: {interests: "taxes"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("615386878a968c205d7dbf09"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	]
+}
+{
+	"_id" : ObjectId("615386d48a968c205d7dbf0a"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	]
+}
+{
+	"_id" : ObjectId("615386f28a968c205d7dbf0b"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"computers",
+		"fishing"
+	]
+}
+{
+	"_id" : ObjectId("615387188a968c205d7dbf0c"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"sleepings",
+		"rats"
+	]
+}
+{
+	"_id" : ObjectId("615387578a968c205d7dbf0d"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	]
+}
+> db.students.remove({$for: {home_state: "Washington"}})
+WriteResult({
+	"nRemoved" : 0,
+	"writeError" : {
+		"code" : 2,
+		"errmsg" : "unknown top level operator: $for"
+	}
+})
+> db.students.remove({$or: [{home_state: "Washington"}, {home_state: "California}]})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:82
+> db.students.remove({$or: [{home_state: "Washington"}, {home_state: "California"}]})
+WriteResult({ "nRemoved" : 5 })
+> db.students.find().pretty()
+> db.students.insert({name: "John Doe", home_state: "California", luchy_number: "5", birthday: {month: "1", day: "1", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name: "Jane Doe", home_state: "California", luchy_number: "3", birthday: {month: "2", day: "2", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name: "Jonny Smithe", home_state: "California", luchy_number: "7", birthday: {month: "3", day: "3", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name: "Polly Pocket", home_state: "Washington", luchy_number: "9", birthday: {month: "5", day: "5", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name: "Peter Piper", home_state: "Washington", luchy_number: "1", birthday: {month: "4", day: "4", year: "1990"}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615392a18a968c205d7dbf10"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	}
+}
+{
+	"_id" : ObjectId("615392d58a968c205d7dbf12"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	}
+}
+> db.students.update({}, {$set: {"interests": ["coding", "brunch", "mongodb"]}}, {multi: true})
+WriteResult({ "nMatched" : 5, "nUpserted" : 0, "nModified" : 5 })
+> db.students.update({name: "John Doe"}, {$push: {interests: {$each:["running", "golf"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Jane Doe"}, {$push: {interests: {$each:["soccer", "swimming"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Jonny Smithee"}, {$push: {interests: {$each:["computers", "fishing"]}}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.update({name: "Jonny Smithe"}, {$push: {interests: {$each:["computers", "fishing"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Peter Piper"}, {$push: {interests: {$each:["sleepings", "rats"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({name: "Polly Pocket"}, {$push: {interests: {$each:["house", "small things"]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	]
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	]
+}
+{
+	"_id" : ObjectId("615392a18a968c205d7dbf10"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"computers",
+		"fishing"
+	]
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	]
+}
+{
+	"_id" : ObjectId("615392d58a968c205d7dbf12"),
+	"name" : "Peter Piper",
+	"home_state" : "Washington",
+	"luchy_number" : "1",
+	"birthday" : {
+		"month" : "4",
+		"day" : "4",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"sleepings",
+		"rats"
+	]
+}
+> db.students.remove({name: "Peter Piper"})
+WriteResult({ "nRemoved" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	]
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	]
+}
+{
+	"_id" : ObjectId("615392a18a968c205d7dbf10"),
+	"name" : "Jonny Smithe",
+	"home_state" : "California",
+	"luchy_number" : "7",
+	"birthday" : {
+		"month" : "3",
+		"day" : "3",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"computers",
+		"fishing"
+	]
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	]
+}
+> db.students.remove({luchy_number: {$gt: 5}}, {justOne: true})
+WriteResult({ "nRemoved" : 0 })
+> db.students.remove({luchy_number: {$gt: "5"}}, {justOne: true})
+WriteResult({ "nRemoved" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	]
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	]
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	]
+}
+> db.students.update({}, {$set: {"number_of_belts": "0"}}, {multi: true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	],
+	"number_of_belts" : "0"
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	],
+	"number_of_belts" : "0"
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	],
+	"number_of_belts" : "0"
+}
+> db.students.update({home_state: "Washington"}, {$inc: {number_of_belts: 1}}, {multi: true})
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 0,
+	"nModified" : 0,
+	"writeError" : {
+		"code" : 14,
+		"errmsg" : "Cannot apply $inc to a value of non-numeric type. {_id: ObjectId('615392ba8a968c205d7dbf11')} has the field 'number_of_belts' of non-numeric type string"
+	}
+})
+> db.students.update({home_state: "Washington"}, {$inc: {number_of_belts: "1"}}, {multi: true})
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 0,
+	"nModified" : 0,
+	"writeError" : {
+		"code" : 14,
+		"errmsg" : "Cannot increment with non-numeric argument: {number_of_belts: \"1\"}"
+	}
+})
+> db.students.update({}, {$set: {"number_of_belts": 0}}, {multi: true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+> db.students.update({home_state: "Washington"}, {$inc: {number_of_belts:1}}, {multi: true})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	],
+	"number_of_belts" : 1
+}
+> db.students.update({}, {$rename: {"number_of_belts": "belts_earned"})
+... ^C
+
+> db.students.update({}, {$rename: "{number_of_belts":"belts_earned"}})
+SyntaxError: missing } after property list :
+@(shell):1:51
+> db.students.update({}, {$rename: {"number_of_belts":"belts_earned"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	],
+	"belts_earned" : 0
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	],
+	"number_of_belts" : 1
+}
+> db.students.update({}, {$rename: {"number_of_belts":"belts_earned"}},{mulit: true})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.students.update({}, {$rename: {"number_of_belts":"belts_earned"}}, {mulit: true})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"luchy_number" : "5",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	],
+	"belts_earned" : 0
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"luchy_number" : "3",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	],
+	"number_of_belts" : 0
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"luchy_number" : "9",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	],
+	"number_of_belts" : 1
+}
+> db.students.update({}, {$unset: {luchy_number:""})
+... ^C
+
+> db.students.update({}, {$unset: {luchy_number:""})
+... ^C
+
+> db.students,update({}, {$unset: {luchy_number: ""}}, {multi: true})
+ReferenceError: update is not defined :
+@(shell):1:13
+> db.students,update({}, {$unset: {luchy_number: ""}}, {multi: true})
+ReferenceError: update is not defined :
+@(shell):1:13
+> db.students,update({}, {$unset: {luchy_number: ""}}, {multi: true})
+ReferenceError: update is not defined :
+@(shell):1:13
+> db.students.update({}, {$unset:{luchy_number:""}},{multi:true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+> db.students.update({}, {$currentDate:{updated_on:true}},{multi:true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("6153928a8a968c205d7dbf0e"),
+	"name" : "John Doe",
+	"home_state" : "California",
+	"birthday" : {
+		"month" : "1",
+		"day" : "1",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"running",
+		"golf"
+	],
+	"belts_earned" : 0,
+	"updated_on" : ISODate("2021-09-28T22:29:28.064Z")
+}
+{
+	"_id" : ObjectId("615392998a968c205d7dbf0f"),
+	"name" : "Jane Doe",
+	"home_state" : "California",
+	"birthday" : {
+		"month" : "2",
+		"day" : "2",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"soccer",
+		"swimming"
+	],
+	"number_of_belts" : 0,
+	"updated_on" : ISODate("2021-09-28T22:29:28.064Z")
+}
+{
+	"_id" : ObjectId("615392ba8a968c205d7dbf11"),
+	"name" : "Polly Pocket",
+	"home_state" : "Washington",
+	"birthday" : {
+		"month" : "5",
+		"day" : "5",
+		"year" : "1990"
+	},
+	"interests" : [
+		"coding",
+		"brunch",
+		"mongodb",
+		"house",
+		"small things"
+	],
+	"number_of_belts" : 1,
+	"updated_on" : ISODate("2021-09-28T22:29:28.064Z")
+}
