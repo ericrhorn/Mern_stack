@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
-const jokeSchema = new mongoose.Schema({
+const jokeSchema = new mongoose.Schema(
+    {
 	setup: String,
 	punchline: String,
-    createdAt: Date,
-    updatedAt: Date,
-});
+    },
+    {timestamps: true}
+);
 
 const Joke = mongoose.model("Joke", jokeSchema);
 
