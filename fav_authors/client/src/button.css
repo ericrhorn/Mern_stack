@@ -1,0 +1,20 @@
+button {
+  display: inline-block;
+}
+
+table, th, td {
+    margin: 10px;
+    width: 500px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr {
+    width: 250px;
+}
+
+.editDelete {
+    display: inline-block;
+    padding: 5px;
+}
+
